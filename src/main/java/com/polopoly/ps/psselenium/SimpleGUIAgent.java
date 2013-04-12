@@ -8,6 +8,15 @@ public class SimpleGUIAgent extends GUIAgentBase implements SimpleGUIAgentInterf
 
     private Agent007 agent007;
 
+    public static SimpleGUIAgent agent;
+
+    public SimpleGUIAgent() {
+        super();
+        agent = this;
+        // Create your agents here
+        agent007 = new Agent007(this);
+    }
+
     public SimpleGUIAgent(WebDriverTestSetup webDriverTestSetup) {
         super(webDriverTestSetup);
         // Create your agents here
@@ -17,4 +26,12 @@ public class SimpleGUIAgent extends GUIAgentBase implements SimpleGUIAgentInterf
     public Agent007 agent007() {
         return agent007;
     }
+
+    public static SimpleGUIAgent getAgent() {
+        if (agent == null) {
+            new SimpleGUIAgent();
+        }
+        return agent;
+    }
+
 }

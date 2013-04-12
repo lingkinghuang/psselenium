@@ -19,7 +19,7 @@ public class SeleniumTestRunner extends BlockJUnit4ClassRunner {
     private void initInjectorIfNecessary() {
         synchronized (initLock) {
             if (injector == null) {
-                injector = Guice.createInjector(new SeleniumTestModule());
+                injector = Guice.createInjector(new SeleniumTestModule(true));
             }
         }
     }

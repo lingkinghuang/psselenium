@@ -7,9 +7,32 @@ import com.polopoly.ps.psselenium.framework.WebDriverTestSetup;
 
 public class SeleniumTestModule extends AbstractModule {
 
+    private boolean instantiateNow;
+
+    public SeleniumTestModule() {
+        this(false);
+    }
+
+    public SeleniumTestModule(boolean instantiateNow) {
+        setInstantiateNow(instantiateNow);
+    }
+
     @Override
     public void configure() {
-        WebDriverTestSetup driverSetup = new WebDriverTestSetup(new FirefoxDriver());
-        bind(SimpleGUIAgentInterface.class).toInstance(new SimpleGUIAgent(driverSetup));
+        if (isInstantiateNow()) {
+            WebDriverTestSetup driverSetup = new WebDriverTestSetup(new FirefoxDriver());
+            bind(SimpleGUIAgentInterface.class).toInstance(new SimpleGUIAgent(driverSetup));
+        } else {
+            // lazy binding
+            bind(SimpleGUIAgentInterface.class).toProvider(new SimpleGUIAgentProvider());
+        }
+    }
+
+    private boolean isInstantiateNow() {
+        return instantiateNow;
+    }
+
+    private void setInstantiateNow(boolean instantiateNow) {
+        this.instantiateNow = instantiateNow;
     }
 }

@@ -1,13 +1,15 @@
 package com.polopoly.ps.psselenium.agent;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.polopoly.ps.psselenium.framework.WebDriverTestBase;
 import com.polopoly.ps.psselenium.framework.WebDriverTestSetup;
 
 /**
- * This agent acts as a holder for agents that interacts with the Polopoly Admin GUI.
- * Every test of {@link WebDriverTestBase} has a reference to a {@link GUIAgentBase}.
+ * This agent acts as a holder for agents that interacts with the Polopoly Admin
+ * GUI. Every test of {@link WebDriverTestBase} has a reference to a
+ * {@link GUIAgentBase}.
  */
 public abstract class GUIAgentBase implements GUIAgent {
 
@@ -29,6 +31,12 @@ public abstract class GUIAgentBase implements GUIAgent {
     private CodeMirrorAgent codeMirrorAgent;
 
     private final WebDriverTestSetup webDrivertTestSetup;
+
+    public GUIAgentBase() {
+        WebDriverTestSetup driverSetup = new WebDriverTestSetup(new FirefoxDriver());
+        this.webDrivertTestSetup = driverSetup;
+        createAgents();
+    }
 
     public GUIAgentBase(WebDriverTestSetup webDriverTestSetup) {
         this.webDrivertTestSetup = webDriverTestSetup;
@@ -55,129 +63,165 @@ public abstract class GUIAgentBase implements GUIAgent {
         codeMirrorAgent = new CodeMirrorAgent(this);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#getWebDriver()
      */
     public WebDriver getWebDriver() {
         return webDrivertTestSetup.getWebDriver();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#getBaseURL()
      */
     public String getBaseURL() {
         return webDrivertTestSetup.getBaseURL();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentLogin()
      */
     public LoginAgent agentLogin() {
         return loginAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentLogout()
      */
     public LogoutAgent agentLogout() {
         return logoutAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentWait()
      */
     public WaitAgent agentWait() {
         return waitAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentActionEvent()
      */
     public ActionEventAgent agentActionEvent() {
         return actionEventAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentFrame()
      */
     public FrameAgent agentFrame() {
         return frameAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentContentNavigator()
      */
     public ContentNavigatorAgent agentContentNavigator() {
         return contentAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentInput()
      */
     public InputAgent agentInput() {
         return inputAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentToolbar()
      */
     public ToolbarAgent agentToolbar() {
         return toolbarAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentClipboard()
      */
     public ClipboardAgent agentClipboard() {
         return clipboardAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentSelectTab()
      */
     public SelectTabAgent agentSelectTab() {
         return selectTabAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentContentCreator()
      */
     public ContentCreatorAgent agentContentCreator() {
         return contentCreatorAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentTreeSelect()
      */
     public TreeSelectAgent agentTreeSelect() {
         return treeSelectAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentSearch()
      */
     public SearchAgent agentSearch() {
         return searchAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentQuickCreator()
      */
     public QuickContentCreatorAgent agentQuickContentCreator() {
         return quickContentCreatorAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#agentCodeMirror()
      */
     public CodeMirrorAgent agentCodeMirror() {
         return codeMirrorAgent;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.polopoly.ps.psselenium.agent.GUIAgent#getWebDriverTestSetup()
      */
     public WebDriverTestSetup getWebDriverTestSetup() {
-      return webDrivertTestSetup;
+        return webDrivertTestSetup;
     }
 }
